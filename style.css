@@ -143,10 +143,6 @@ section {
     gap: 12px;
 }
 
-.section-wrap .flex-reverse{
-    flex-direction: row-reverse;
-}
-
 .last {
     width: 100%;
     background-color: #CFE5FF;
