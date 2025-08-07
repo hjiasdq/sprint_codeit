@@ -14,6 +14,7 @@ body {
 
 a {
   cursor: pointer;
+  text-decoration: none;
 }
 
 button {
@@ -70,9 +71,11 @@ button {
     line-height: 32px;
     text-align: center;
   }
+
   .login-pw {
     position:relative;
   }
+
   .show-pw {
     position: absolute;
     right: 20px;
@@ -113,3 +116,6 @@ button {
     margin-right: 10px;
   }
   
+  .login-signup .underline {
+    text-decoration: underline;
+  }
