@@ -1,60 +1,74 @@
-# 08.07 공부 내용
+# 08.08 공부 내용
 
 
 ## css flex와 grid 박스에 대해서
 
+- flex와 grid의 차이점 -> flex는 한 방향 레이아웃이지만 grid는 두 방향(가로-세로) 레이아웃 시스템이다.
 
-### 1. css flex란
 
-기본적으로 flex 레이아웃을 만들기 위한 기본 html 구조는 
+### 1. css grid란
+
+기본적으로 grid 레이아웃을 만들기 위한 기본 html 구조는 
 ```
-<div class="flex-container">
-  <div class="flex-item"> 안녕하세요. </div>
-  <div class="flex-item"> flex-box 입니다. </div>
-  <div class="flex-item"> 안녕히가세요. </div>
+<div class="grid-container">
+  <div class="grid-item"> 안녕하세요. </div>
+  <div class="grid-item"> grid-box 입니다. </div>
+  <div class="grid-item"> 안녕히가세요. </div>
+  <div class="grid-item"> 어서오세요 </div>
+  <div class="grid-item"> grid 입니다. </div>
+  <div class="grid-item"> 안녕히가세요. </div>
 </div>
 
 
 ```
 
 
-flex-container가 flex의 영향을 받는 박스이고, 설정된 속성에 따라 각각의 아이템들이 배치가 된다. 하지만 꼭 flex-container안에 여러개의 item이 들어가있을 필요는 없다.
-자식이 1개뿐일 때도 수직+수평 가운데 정렬, 높이를 부모에 맞출 때, 미디어 쿼리 없이 반응형 정렬 조절을 할때 유용하게 쓸 수 있다.
-즉, __자식요소가 1개이고 정렬이 필요할때 유용하게 사용 가능.__
-
-flex의 속성들은 __container에 적용하는 속성__ 과 __item에 적용하는 속성__ 이렇게  두가지로 나뉜다.
+grid-container가 영향을 받는 박스이고, 설정된 속성에 따라 각각의 아이템들이 배치가 된다. 
 
 
-#### 1. flexbox의 속성
+gird 속성들은 __container에 적용하는 속성__ 과 __item에 적용하는 속성__ 이렇게  두가지로 나뉜다.
 
 
-flexbox의 속성
+
+#### 1. grid의 속성
+
+
+grid 속성
 
 - display
 
 
 ```
-.flex-container {display: flex;}
-를 적용하면 기본적으로 부모 요소에 flex가 설정이 된다.
-
-1. display: flex;는 기본적으로 가로 방향으로 배치되고 자신이 가진 내용물의 width값 만큼 공간을 차지하게 되며 height는 컨테이너의 높이만큼 늘어난다.
-
-2. display의 기본축은 가로 방향(Main Axis)이지만 flex-direction: column을 활용하여 세로방향으로 바꿀시 기본축은 세로축(Cross Axis)이 된다.
+.grid-container {display: grid;}
+를 적용하면 기본적으로 부모 요소에 grid가 설정이 된다.
 
 ```
 
-- __justify-content__
+- __gird-tempalte-rows(columns)__
 
 
 ```
-.flex-container {justify-content: center;}
+.grid-container {
+  grid-templates-rows(columns):200px 200px 500px;
+  grid-templates-rows(columns):repeat(3, 1fr);
+  grid-templates-rows(columns):repeat(3, minamx(100px, auto));
+  grid-templates-rows(columns):repeat(auto-fill, minmax(20%, auto));
+  }
 
-justify-content는 기본축에 따라 방향을 아이템들을 정렬하는 방식을 정하는 css 속성이다.
+grid-templates-rows는 행 배치 column은 열 배치를 결정한다.
+grid-templates-rows와 column에는 여러가지 값들을 작성할 수 있는데
+비교를 해보자면
 
 
-1. justify-content: start; -> justify-content 의 기본값 flex-direction이 row일때는 왼쪽, column일때는 위쪽으로 정렬한다.
-2. justify-content: end; -> start와는 반대로, 아이템들을 끝점으로 정렬한다. row일때는 오른쪽, column일때는 아래쪽으로 정렬한다. 
-3. justify-content: center; -> 기본축을 중심으로 flex item들을 중앙 배치하게 된다.
+1. grid-templates-rows(columns):200px 200px 500px; -> 각 칸을 200px 200px 500px로 크기를 맞추겠다는 뜻이다.
+
+2. grid-templates-rows(columns):repeat(3, 1fr); -> repeat은 괄호안의 숫자대로 (횟수, 크기)를 뜻하며 본 예시는 1fr의 크기로 3번 반복하겠다는 뜻이다.
+
+1fr은 비율을 생각하면 된다. 고정 크기와 가변 크기를 섞어 쓸수있다.
+
+3. grid-templates-rows(columns):repeat(3, minamx(100px, auto)); -> 
+minamx는 최소한 100px, 최대는 자동으로 늘어난다는 뜻이다. 즉 아무리 요소의 양이 적더라도 최소한의 크기는 100px만큼 확보하고, 내용이 너무 많아 100px 넘어가면 알아서 늘어나도록 처리해준다.
+
 4. justify-content: between; -> 각 끝의 아이템들을 끝으로 붙이고 아이템들의 간격을 균등하게 만들어준다.
 5. justify-content: space-around; -> 아이템의 양쪽 끝을 균등하게 간격을 준다.
 ```
